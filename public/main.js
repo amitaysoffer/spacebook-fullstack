@@ -19,10 +19,19 @@ var SpacebookApp = function() {
   }
 
   function addPost(newPost) {
+    $.ajax({
+      method: "post",
+      url: '/post',
+      success: function({text: newPost, comments: []}) {
+        console.log(data);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus);
+      }
+    }); 
     posts.push({ text: newPost, comments: [] });
     _renderPosts();
   }
-
 
   function _renderComments(postIndex) {
     var post = $(".post")[postIndex];
